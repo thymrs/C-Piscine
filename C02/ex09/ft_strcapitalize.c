@@ -1,37 +1,32 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strcapitalize.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: perattan <perattan@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/10 17:14:39 by perattan          #+#    #+#             */
-/*   Updated: 2025/07/14 20:27:42 by perattan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdio.h>
-#include <unistd.h>
 
 char	*ft_strcapitalize(char *str)
 {
-	int	i;
+	char	*head;
 
-	i = 0;
-	while (str[i] != '\0')
+	head = str;
+	if (*str >= 'a' && *str <= 'z')
+		*str -= 32;
+	++str; // reminder ==> moves the pointer to the next character!
+	while (*str != '\0')
 	{
-		if ((str[i] >= 'A' && str[i] <= 'Z' && str[i - 1] == ))
-		{
-			str[i] = str[i] + 32;
-		}
-		i++;
+		if (*str >= 'A' && *str <= 'Z')
+			*str += 32;
+		if (!(*(str - 1) >= '0' && *(str - 1) <= '9')
+				&& !(*(str - 1) >= 'A' && *(str - 1) <= 'Z')
+					&& !(*(str - 1) >= 'a' && *(str - 1) <= 'z')
+						&& *str >= 'a' && *str <= 'z')
+			*str -= 32;
+		++str;
 	}
-	return (str);
+	return (head);
 }
 
-// int	main(void)
-// {
-// 	char j[] = "AHSJHSA00";
-// 	ft_strlowcase(j);
-// 	printf("%s", j);
-// }
+int main(void)
+{
+    char str1[] = "hELLo wOrld! tHis iS 42SChool.";
+
+    printf("Original: %s\n", str1);
+    printf("Capitalized: %s\n\n", ft_strcapitalize(str1));
+    return 0;
+}
